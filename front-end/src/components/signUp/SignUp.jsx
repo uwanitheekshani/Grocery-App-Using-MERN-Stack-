@@ -12,6 +12,8 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function Copyright(props) {
   return (
@@ -31,13 +33,55 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignUp() {
-  const handleSubmit = (event) => {
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event) => {
+    // event.preventDefault();
+
+    // const data = new FormData(event.currentTarget);
+
+    //   const user = {
+    //     userFirstName: data.get('firstName'),
+    //     userLastName: data.get('lastName'),
+    //     userEmail: data.get('email'),
+    //     userPassword: data.get('password') 
+    //   }
+
+    //    try {
+    //   await axios
+    //     .post("http://localhost:3500/api/v1/user", {
+    //       user,
+    //     })
+    //     .then((res) => {
+    //       if (res.data.message ==="saved") {
+    //         localStorage.setItem('user',JSON.stringify(user))
+    //         // navigate("/LogIn");
+    //       //  return <Navigate to="/Hero"/>
+    //       }
+    //     });
+    // } catch (err) {
+    //   alert("Failed");
+    //   console.log(err.message);
+    // }
+
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    const form = event.target;
+    const formData = new FormData(form);
+
+    try {
+      const response = await axios.post('/api/v1/user', formData);
+      console.log('Sign-up successful!', response.data);
+      // Handle successful sign-up, e.g., show success message, redirect, etc.
+    } catch (error) {
+      console.error('Sign-up failed!', error.response.data);
+      // Handle sign-up error, e.g., show error message to the user
+    }
+
+
+
+
+     
   };
 
   return (
