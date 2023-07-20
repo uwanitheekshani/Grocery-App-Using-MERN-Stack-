@@ -50,13 +50,34 @@ export default function LogIn() {
             signinPassword
         })
         .then((res)=>{
-            if(res.status=== 201){
-              localStorage.setItem('user',JSON.stringify(res.data.user));
-              alert("Login Success")
-              navigate("/admindash")
-             
+          
+            const user = res.data.data;
 
+            if(user.userEmail==="uwanitheekshani@gmail.com"){
+              console.log("admin")
+                navigate('/admindash')
+            }else{
+              console.log("user")
+              navigate('/Hero')
             }
+
+
+          // if(res.data.userEmail===signinEmail){
+          //   alert("Login Success")
+          //    navigate("/admindash")
+          // }
+
+            // if(res.status=== 201){
+            //   localStorage.setItem('user',JSON.stringify(res.data.user));
+            //   if(res.data.user.userEmail==='uwanitheekshani@gmail.com' && res.data.user.userPassword==='aaaa'){
+            //     console.log(res.data.user.userEmail);
+            //     alert("Login Success")
+            //     navigate("/admindash")
+            //   }
+            //   alert("Login Success")
+            //   // navigate("/admindash")
+             
+            // }
         })
     }catch(err){
         alert("Email or password incorrect.!")

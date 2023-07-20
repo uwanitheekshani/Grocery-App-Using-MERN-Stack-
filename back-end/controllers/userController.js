@@ -46,10 +46,12 @@ const getUser = (req, res) => {
 
     User.findOne({userEmail:email,userPassword:password})
         .then((response)=>{
+            console.log("response: "+response);
+
             if(response == null){
                 res.status(409).json({message:"user name or password incorrect.!"})
             }else{
-                res.status(201).json({message:"Logged"})
+                res.status(201).json({message:"Logged", data:response})
             }
         })
         .catch((err)=>{
