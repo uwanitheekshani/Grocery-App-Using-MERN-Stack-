@@ -42,11 +42,6 @@ export default function LogIn() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    // const data = new FormData(event.currentTarget);
-    // console.log({
-    //   email: data.get('email'),
-    //   password: data.get('password'),
-    // });
 
     try{
       await axios
@@ -56,10 +51,11 @@ export default function LogIn() {
         })
         .then((res)=>{
             if(res.status=== 201){
-              // localStorage.setItem(JSON.stringify(res.data.email,res.data.password));
               localStorage.setItem('user',JSON.stringify(res.data.user));
               alert("Login Success")
-              navigate("/Hero");
+              navigate("/admindash")
+             
+
             }
         })
     }catch(err){
@@ -67,6 +63,7 @@ export default function LogIn() {
     }
 
   };
+
 
   return (
     <ThemeProvider theme={defaultTheme}>
