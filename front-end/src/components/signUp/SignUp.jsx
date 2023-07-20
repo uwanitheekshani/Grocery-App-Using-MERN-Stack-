@@ -14,6 +14,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+// import { Link } from 'react-router-dom'
 
 function Copyright(props) {
   return (
@@ -36,52 +37,43 @@ export default function SignUp() {
 
   const navigate = useNavigate();
 
-  const handleSubmit = async (event) => {
-    // event.preventDefault();
-
-    // const data = new FormData(event.currentTarget);
-
-    //   const user = {
-    //     userFirstName: data.get('firstName'),
-    //     userLastName: data.get('lastName'),
-    //     userEmail: data.get('email'),
-    //     userPassword: data.get('password') 
-    //   }
-
-    //    try {
-    //   await axios
-    //     .post("http://localhost:3500/api/v1/user", {
-    //       user,
-    //     })
-    //     .then((res) => {
-    //       if (res.data.message ==="saved") {
-    //         localStorage.setItem('user',JSON.stringify(user))
-    //         // navigate("/LogIn");
-    //       //  return <Navigate to="/Hero"/>
-    //       }
-    //     });
-    // } catch (err) {
-    //   alert("Failed");
-    //   console.log(err.message);
-    // }
-
+  const handleLinkClick =(event) =>{
     event.preventDefault();
-    const form = event.target;
-    const formData = new FormData(form);
+    navigate("/Login");
+  }
 
-    try {
-      const response = await axios.post('/api/v1/user', formData);
-      console.log('Sign-up successful!', response.data);
-      // Handle successful sign-up, e.g., show success message, redirect, etc.
-    } catch (error) {
-      console.error('Sign-up failed!', error.response.data);
-      // Handle sign-up error, e.g., show error message to the user
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const data = new FormData(event.currentTarget);
+
+    const user = {
+      userFirstName: data.get('firstName'),
+      userLastName: data.get('lastName'),
+      userEmail: data.get('email'),
+      userPassword: data.get('password')
     }
 
+    try {
 
+      await axios
+        .post("http://localhost:3500/api/v1/user", {
+          user,
+        })
+        .then((res) => {
+          alert(res.data.message)
+          navigate("/Login");
+          if (res.data.message === "saved") {
+            localStorage.setItem('user', JSON.stringify(user))
+            navigate("/Login");
+            //  return <Navigate to="/Hero"/>
+          }
+        });
+    } catch (err) {
+      alert("Failed");
+      console.log(err.message);
+    }
 
-
-     
   };
 
   return (
@@ -163,11 +155,12 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="#" variant="body2">
+                <Link  href='#' variant="body2" onClick={handleLinkClick}>
                   Already have an account? Sign in
                 </Link>
               </Grid>
             </Grid>
+
           </Box>
         </Box>
         <Copyright sx={{ mt: 5 }} />

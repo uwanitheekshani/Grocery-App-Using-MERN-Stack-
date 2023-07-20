@@ -9,7 +9,7 @@ export const RouteHandler = () =>{
             <Routes>
               <Route path="/" element={<Hero/>}/>
               <Route path="/Hero" element={<Hero/>}/>
-              <Route path="/LogIn" element={<LogIn/>}/>
+              <Route path="/Login" element={<LogIn/>}/>
               <Route path="/SignUp" element={<SignUp/>}/>
             </Routes>
         </>

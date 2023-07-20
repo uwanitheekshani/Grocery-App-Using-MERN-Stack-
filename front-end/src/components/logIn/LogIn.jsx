@@ -12,6 +12,9 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 function Copyright(props) {
   return (
@@ -31,13 +34,38 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function LogIn() {
-  const handleSubmit = (event) => {
+
+  const [signinEmail, setEmail] = useState("");
+  const [signinPassword, setPassword] = useState("");
+
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+    // const data = new FormData(event.currentTarget);
+    // console.log({
+    //   email: data.get('email'),
+    //   password: data.get('password'),
+    // });
+
+    try{
+      await axios
+        .post("http://localhost:3500/api/v1/login",{
+            signinEmail,
+            signinPassword
+        })
+        .then((res)=>{
+            if(res.status=== 201){
+              // localStorage.setItem(JSON.stringify(res.data.email,res.data.password));
+              localStorage.setItem('user',JSON.stringify(res.data.user));
+              alert("Login Success")
+              navigate("/Hero");
+            }
+        })
+    }catch(err){
+        alert("Email or password incorrect.!")
+    }
+
   };
 
   return (
@@ -68,6 +96,8 @@ export default function LogIn() {
               name="email"
               autoComplete="email"
               autoFocus
+              value={signinEmail}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <TextField
               margin="normal"
@@ -78,6 +108,8 @@ export default function LogIn() {
               type="password"
               id="password"
               autoComplete="current-password"
+              value={signinPassword}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}

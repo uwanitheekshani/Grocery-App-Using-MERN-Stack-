@@ -16,13 +16,13 @@ const saveUser = (req,res) => {
     // res.status(201).json({message:"awaaaa"});
 
     const userObj = new User({
-        userFirstName:req.body.user.fName,
-        userLastName:req.body.user.lName,
-        userEmail: req.body.user.email,
-        userPassword: req.body.user.password,
+        userFirstName:req.body.user.userFirstName,
+        userLastName:req.body.user.userLastName,
+        userEmail: req.body.user.userEmail,
+        userPassword: req.body.user.userPassword,
     })
 
-    User.findOne({userEmail: req.body.user.email})
+    User.findOne({userEmail: req.body.user.userEmail})
         .then(response =>{
             if(response === null){
                 //no exist student
@@ -41,8 +41,8 @@ const saveUser = (req,res) => {
 }
 
 const getUser = (req, res) => {
-    const email = req.body.email;
-    const password = req.body.password;
+    const email = req.body.signinEmail;
+    const password = req.body.signinPassword;
 
     User.findOne({userEmail:email,userPassword:password})
         .then((response)=>{
