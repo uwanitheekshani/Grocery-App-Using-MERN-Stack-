@@ -8,6 +8,11 @@ router.route('/item')
 router.route('/getItem')
 .get(ItemController.getItem)
 
+router.route('/getItem/:id')
+.get(ItemController.getSelectItem)
+
+router.route('/updateItem/:id')
+.put(ItemController.updateItem)
 // router.route('/login')
 // .post(UserController.getUser)
 

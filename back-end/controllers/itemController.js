@@ -50,10 +50,29 @@ const getItem = (req, res) => {
    .catch(err => res.json(err))
 }
 
+const getSelectItem = (req,res) =>{
+    const id = req.params.id;
+    Item.findById({_id:id})
+    .then(items => res.json(items))
+    .catch(err => res.json(err))
+}
+
+const updateItem = (req,res) =>{
+    const id = req.params.id;
+    Item.findByIdAndUpdate({_id: id}, {
+    itemCode:req.body.itemCode, 
+    itemName:req.body.itemName, 
+    itemPrice:req.body.itemPrice, 
+    qtyOnHand:req.body.qtyOnHand})
+    
+    .then(items => res.json(items))
+    .catch(err => res.json(err))
+}
+
 
 
 
 const deleteItem = () => { }
-const updateItem = () => { }
+// const updateItem = () => { }
 
-module.exports = {saveItem,getItem}
+module.exports = {saveItem,getItem,getSelectItem,updateItem}

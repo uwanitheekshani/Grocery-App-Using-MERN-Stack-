@@ -14,23 +14,8 @@ import Typography from '@mui/material/Typography';
 import axios from 'axios';
 import './AdminDash.css'
 import { useState } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import { useEffect } from 'react';
-
-
-// function createData(name, calories, fat, carbs, protein) {
-//   return { name, calories, fat, carbs, protein };
-// }
-
-// const rows = [
-//   createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-//   createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-//   createData('Eclair', 262, 16.0, 24, 6.0),
-//   createData('Cupcake', 305, 3.7, 67, 4.3),
-//   createData('Gingerbread', 356, 16.0, 49, 3.9),
-// ];
-
-
 
 
 export default function AdminDash() {
@@ -40,24 +25,32 @@ export default function AdminDash() {
   const [itemPrice, setItemPrice] = useState()
   const [qtyOnHand, setQtyOnHand] = useState()
 
-  // const navigate = useNavigate()
-
 
   const [items, setItems] = useState([])
 
   useEffect(() => {
-    axios.get("http://localhost:3500/api/v1/getItem")
-      .then(res => setItems(res.data))
-      .catch(err => console.log(err))
+    fetchDataFromServer();
   }, [])
+
+  const fetchDataFromServer = () => {
+    // Your code to fetch data from the server goes here
+    axios.get('http://localhost:3500/api/v1/getItem')
+      .then((res) => {
+        setItems(res.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   const handleItemSubmit = (e) => {
     e.preventDefault();
     axios.post("http://localhost:3500/api/v1/item", { itemCode, itemName, itemPrice, qtyOnHand })
-      .then(result => {
-        console.log(result)
+      .then(res => {
+        setItems([...items, res.data]);
+        console.log(items)
+        fetchDataFromServer();
         alert("Saved");
-        // navigate('/')
 
       })
       .catch(err => {
@@ -66,44 +59,7 @@ export default function AdminDash() {
       })
   }
 
-  // const handleItemSubmit = async (event) => {
-  //   event.preventDefault();
 
-  //   const idata = new FormData(event.currentTarget);
-
-  //   const item = {
-  //     itemCode: idata.get('itemCode'),
-  //     itemName: idata.get('itemName'),
-  //     itemPrice: idata.get('itemPrice'),
-  //     qtyOnHand: idata.get('qtyOnHand')
-  //   }
-
-  //   try {
-
-  //     await axios
-  //       .post("http://localhost:3500/api/v1/item", {
-  //         item,
-  //       })
-  //       .then((res) => {
-  //         // alert(res.data.message)
-  //         console.log(res);
-  //         // navigate("/Login");
-  //         if (res.data.message === "saved") {
-  //           console.log(res.data);
-  //           localStorage.setItem('item', JSON.stringify(item))
-  //           alert("Saved");
-
-  //           // navigate("/Login");
-  //           //  return <Navigate to="/Hero"/>
-  //         }
-  //       });
-  //   } 
-  //   catch (err) {
-  //     alert("Failed");
-  //     console.log(err.message);
-  //   }
-
-  // };
 
   return (
     <>
@@ -136,15 +92,15 @@ export default function AdminDash() {
         />
 
 
-        <Stack direction="row" spacing={2} className='buttons-stack'>
-          <Button color="secondary">Update</Button>
+        {/* <Stack direction="row" spacing={2} className='buttons-stack'> */}
+          {/* <Button color="secondary">Update</Button> */}
           <Button type="submit" variant="contained" color="success">
             Save
           </Button>
-          <Button variant="outlined" color="error">
+          {/* <Button variant="outlined" color="error">
             Delete
-          </Button>
-        </Stack>
+          </Button> */}
+        {/* </Stack> */}
 
 
       </Box>
@@ -158,6 +114,7 @@ export default function AdminDash() {
               <TableCell className='item-tableH' align="right">ItemName</TableCell>
               <TableCell className='item-tableH' align="right">ItemPrice</TableCell>
               <TableCell className='item-tableH' align="right">QTYOnHand</TableCell>
+              <TableCell className='item-tableH' align="right">Action</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -172,10 +129,16 @@ export default function AdminDash() {
                 <TableCell align="right">{item.itemName}</TableCell>
                 <TableCell align="right">{item.itemPrice}</TableCell>
                 <TableCell align="right">{item.qtyOnHand}</TableCell>
+                <TableCell align="right">
+                  <Link to={`/itemUpdate/${item._id}`}><Button color="secondary">Update</Button></Link>
+                  <Button variant="outlined" color="error">
+                    Delete
+                  </Button>
+                </TableCell>
               </TableRow>
-})}
+            })}
           </TableBody>
-  
+
 
         </Table>
       </TableContainer>
