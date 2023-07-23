@@ -33,7 +33,7 @@ function Copyright(props) {
 
 const defaultTheme = createTheme();
 
-export default function LogIn() {
+export default function AdminLogIn() {
 
   const [signinEmail, setEmail] = useState("");
   const [signinPassword, setPassword] = useState("");
@@ -45,21 +45,23 @@ export default function LogIn() {
 
     try{
       await axios
-        .post("http://localhost:3500/api/v1/login",{
+        .post("http://localhost:3500/api/v1/adminLogin",{
             signinEmail,
             signinPassword
         })
         .then((res)=>{
           
-            const user = res.data.data;
-            navigate('/cart')
-            // if(user.userEmail==="uwanitheekshani@gmail.com"){
-            //   console.log("admin")
-            //     navigate('/admindash')
-            // }else{
-            //   console.log("user")
-            //   navigate('/Hero')
-            // }
+            const admin = res.data.data;
+
+            if(admin.adminEmail==="uwanitheekshani@gmail.com"){
+              console.log("admin")
+                navigate('/admindash')
+            }else{
+              console.log("user")
+              navigate('/Hero')
+            }
+
+
         })
     }catch(err){
         alert("Email or password incorrect.!")

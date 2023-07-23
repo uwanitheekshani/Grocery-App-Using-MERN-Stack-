@@ -4,16 +4,6 @@ const req = require('express/lib/request');
 const res = require('express/lib/response');
 
 const saveUser = (req,res) => {
-    // const tempUser = new User({
-    //     userFirstName: req.body.user.fName,
-    //     userLastName: req.body.user.lName,
-    //     userEmail: req.body.user.email,
-    //     userPassword: req.body.user.password,
-
-    // });
-    // console.log(tempUser);
-
-    // res.status(201).json({message:"awaaaa"});
 
     const userObj = new User({
         userFirstName:req.body.user.userFirstName,

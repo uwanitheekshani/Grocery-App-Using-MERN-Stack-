@@ -138,7 +138,7 @@ export default function AdminDash() {
                 <TableCell align="right">{item.itemPrice}</TableCell>
                 <TableCell align="right">{item.qtyOnHand}</TableCell>
                 <TableCell align="right">
-                  <Link to={`/itemUpdate/${item._id}`}><Button color="secondary">Update</Button></Link>
+                  <Link to={`/itemUpdate/${item._id}`}><Button variant="outlined" color="secondary">Update</Button></Link>
                   <Button variant="outlined" color="error" 
                   onClick={(e) => handleDeleteItem(item._id)}>
                     Delete
