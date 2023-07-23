@@ -59,6 +59,14 @@ export default function AdminDash() {
       })
   }
 
+  const handleDeleteItem = (id) => {
+    axios.delete('http://localhost:3500/api/v1/deleteItem/'+id)
+    .then(res => {console.log(res)
+      window.location.reload()
+    })
+    .catch(err => console.log(err))
+  }
+
 
 
   return (
@@ -117,7 +125,7 @@ export default function AdminDash() {
               <TableCell className='item-tableH' align="right">Action</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
+          <TableBody className='item-body'>
             {items.map((item) => {
               return <TableRow
                 key={item}
@@ -131,7 +139,8 @@ export default function AdminDash() {
                 <TableCell align="right">{item.qtyOnHand}</TableCell>
                 <TableCell align="right">
                   <Link to={`/itemUpdate/${item._id}`}><Button color="secondary">Update</Button></Link>
-                  <Button variant="outlined" color="error">
+                  <Button variant="outlined" color="error" 
+                  onClick={(e) => handleDeleteItem(item._id)}>
                     Delete
                   </Button>
                 </TableCell>

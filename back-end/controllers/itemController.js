@@ -64,15 +64,18 @@ const updateItem = (req,res) =>{
     itemName:req.body.itemName, 
     itemPrice:req.body.itemPrice, 
     qtyOnHand:req.body.qtyOnHand})
-    
+
     .then(items => res.json(items))
     .catch(err => res.json(err))
 }
 
 
-
-
-const deleteItem = () => { }
+const deleteItem = (req,res) => { 
+    const id = req.params.id;
+    Item.findByIdAndDelete({_id:id})
+    .then(res => res.json(res))
+    .catch(err => res.json(err))
+}
 // const updateItem = () => { }
 
-module.exports = {saveItem,getItem,getSelectItem,updateItem}
+module.exports = {saveItem,getItem,getSelectItem,updateItem,deleteItem}
