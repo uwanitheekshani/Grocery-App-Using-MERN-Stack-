@@ -6,6 +6,7 @@ import AdminDash from "../admindash/AdminDash.jsx"
 import ItemUpdatee from "../itemUpdate/ItemUpdate.jsx"
 import AdminLogIn from "../adminLogin/AdminLogin.jsx"
 import Cart from "../cart/Cart.jsx"
+import OrdersCart from "../orderscart/OrdersCart.jsx"
 
 export const RouteHandler = () =>{
     return(
@@ -19,6 +20,7 @@ export const RouteHandler = () =>{
               <Route path='/itemUpdate/:id' element={<ItemUpdatee/>}/>
               <Route path='/admin' element={<AdminLogIn/>}/>
               <Route path='/cart' element={<Cart/>}/>
+              <Route path='/ordersCart' element={<OrdersCart/>}/>
             </Routes>
         </>
     );
