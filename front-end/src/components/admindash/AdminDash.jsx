@@ -16,7 +16,7 @@ import './AdminDash.css'
 import { useState } from 'react';
 import { Link} from 'react-router-dom';
 import { useEffect } from 'react';
-
+import { blueGrey } from '@mui/material/colors';
 
 export default function AdminDash() {
 
@@ -73,6 +73,12 @@ export default function AdminDash() {
     <>
 
       {/* <h4>Admin</h4> */}
+
+      <Link to={'/payments'}>
+      <Button variant="outlined" href="#outlined-buttons" style={{backgroundColor:blueGrey}}>
+        All Payments
+      </Button>
+       </Link>
 
       <Typography variant="h4" gutterBottom>
         Admin

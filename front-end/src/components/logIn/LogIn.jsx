@@ -40,7 +40,7 @@ export default function LogIn() {
 
   const navigate = useNavigate();
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event) => {;
     event.preventDefault();
 
     try{
@@ -48,18 +48,16 @@ export default function LogIn() {
         .post("http://localhost:3500/api/v1/login",{
             signinEmail,
             signinPassword
+           
+  
         })
         .then((res)=>{
           
             const user = res.data.data;
+            localStorage.setItem('formDetails',JSON.stringify(user.userEmail));
+           
             navigate('/cart')
-            // if(user.userEmail==="uwanitheekshani@gmail.com"){
-            //   console.log("admin")
-            //     navigate('/admindash')
-            // }else{
-            //   console.log("user")
-            //   navigate('/Hero')
-            // }
+           
         })
     }catch(err){
         alert("Email or password incorrect.!")

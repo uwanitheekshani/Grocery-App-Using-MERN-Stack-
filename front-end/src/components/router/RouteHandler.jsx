@@ -7,6 +7,8 @@ import ItemUpdatee from "../itemUpdate/ItemUpdate.jsx"
 import AdminLogIn from "../adminLogin/AdminLogin.jsx"
 import Cart from "../cart/Cart.jsx"
 import OrdersCart from "../orderscart/OrdersCart.jsx"
+import ViewOrders from "../viewOrders/ViewOrders.jsx"
+import Payments from "../payments/Payments.jsx"
 
 export const RouteHandler = () =>{
     return(
@@ -21,6 +23,8 @@ export const RouteHandler = () =>{
               <Route path='/admin' element={<AdminLogIn/>}/>
               <Route path='/cart' element={<Cart/>}/>
               <Route path='/ordersCart' element={<OrdersCart/>}/>
+              <Route path='/viewOrders' element={<ViewOrders/>}/>
+              <Route path='/payments' element={<Payments/>}/>
             </Routes>
         </>
     );

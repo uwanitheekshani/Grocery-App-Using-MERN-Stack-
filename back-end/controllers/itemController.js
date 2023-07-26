@@ -5,18 +5,6 @@ const res = require('express/lib/response');
 
 const saveItem = (req,res) => {
 
-    // const newItem = new Item(req.body); // Create a new instance of the Item model based on the request body data
-  
-    // newItem.save()
-    //   .then(item => res.json(item))
-    //   .catch(err => res.status(500).json({ error: err.message }));
- 
-    
-    // Item.save(req.body).
-    // then(item => res.json(item))
-    // .catch(err => res.json(err))
-
-
     const itemObj = new Item({
         itemCode:req.body.itemCode,
         itemName:req.body.itemName,

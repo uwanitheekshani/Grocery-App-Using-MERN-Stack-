@@ -4,6 +4,7 @@ app.use(express.json());
 const userRoute = require('./routes/UserRoute')
 const itemRoute = require('./routes/ItemRoute')
 const adminRoute = require('./routes/AdminRoute')
+const orderRoute = require('./routes/OrderRoute')
 const mongoose = require('mongoose')
 const PORT = 3500;
 
@@ -22,3 +23,4 @@ mongoose.connect(
 app.use('/api/v1/',userRoute);
 app.use('/api/v1/',itemRoute);
 app.use('/api/v1/',adminRoute);
+app.use('/api/v1/',orderRoute);
