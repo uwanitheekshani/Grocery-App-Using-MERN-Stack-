@@ -7,9 +7,11 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -31,37 +33,90 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
-
 export default function ViewOrders() {
+    const location = useLocation();
+    const queryParams = new URLSearchParams(location.search);
+  const customerEmail = queryParams.get('email');
 
     const [orders, setOrders] = useState([])
 
-    const [useremail, setEmail] = useState("")
+    
 
-    useEffect(() => {
+    console.log(customerEmail);
 
-    var userEmail = localStorage.getItem("formDetails");
-    var email = JSON.parse(userEmail);
-    setEmail(email)
+    // const [useremail, setEmail] = useState("")
 
-        axios.get('http://localhost:3500/api/v1/getOrder/'+useremail)
-    .then(res => {console.log(res)
-        setOrders(res.data);
+    // useEffect(async () => {
+
+    // var userEmail = localStorage.getItem("formDetails");
+    // var email = JSON.parse(userEmail);
+    // setEmail(email)
+
+    //     axios.get('http://localhost:3500/api/v1/getSelectOrder/'+customerEmail)
+    // .then(res => {console.log(res)
+    //     setOrders(res.data);
+    //     console.log(res.data)
+    // })
+    // .catch(err => console.log(err))
+    //   }, [])
+
+
+
+    // }, [])
+
+
+
+
+
+
+    useEffect( () => {
+     
+     loadAll();
+
+
+      }, []);
+
+
+      const loadAll = async () =>{
+        console.log(customerEmail)
+        let email=customerEmail;
+
+        // axios
+        //   .post('http://localhost:3500/api/v1/getSelectOrder/'+{email})
+        //   .then((res) => {
+        //     console.log(res.data);
+        //     setOrders(res.data);
+        //   })
+        //   .catch((err) => console.log(err));
+        try{
+
+           
+         await axios
+        .post("http://localhost:3500/api/v1/getSelectOrder",{
+            email
+            
+        })
+        .then((res)=>{
+          
         console.log(res.data)
-    })
-    .catch(err => console.log(err))
-      }, [])
+        setOrders(res.data);
+           
+        }).catch(err=>console.log("err"))
+    }catch(err){
+        alert("Email or password incorrect.!")
+    }
+
+      }
+
+   
+      const handleDeleteOrder = (id) => {
+        axios.delete('http://localhost:3500/api/v1/deleteOrder/'+id)
+        .then(res => {console.log(res)
+          window.location.reload()
+        })
+        .catch(err => console.log(err))
+      }
+
 
   return (
     <TableContainer component={Paper}>
@@ -72,6 +127,7 @@ export default function ViewOrders() {
             <StyledTableCell align="right">Item Name</StyledTableCell>
             <StyledTableCell align="right">Quantity</StyledTableCell>
             <StyledTableCell align="right">Amount</StyledTableCell>
+            <StyledTableCell align="right">Action</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -83,6 +139,12 @@ export default function ViewOrders() {
               <StyledTableCell align="right">{order.itemName}</StyledTableCell>
               <StyledTableCell align="right">{order.qty}</StyledTableCell>
               <StyledTableCell align="right">{order.amount}</StyledTableCell>
+              <StyledTableCell align="right">        
+                  <Button variant="outlined" color="error" 
+                  onClick={(e) => handleDeleteOrder(order._id)}>
+                    Delete
+                  </Button>
+                </StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>

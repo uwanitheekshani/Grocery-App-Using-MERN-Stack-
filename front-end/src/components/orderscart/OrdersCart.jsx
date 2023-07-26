@@ -11,7 +11,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import Button from '@mui/material/Button';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+// import { Link} from 'react-router-dom';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -38,12 +38,14 @@ function createData(name, calories, fat, carbs, protein) {
   return { name, calories, fat, carbs, protein };
 }
 
-export default function OrderCart(props) {
+export default function OrdersCart(props) {
 
   const [orders, setOrders] = useState([])
 
 
-  const [e, setEmail] = useState("");
+  const [email, setEmail] = useState("");
+
+  
 
   useEffect(() => {
 
@@ -66,7 +68,7 @@ export default function OrderCart(props) {
 
 
     const obj = {
-      userEmail: e,
+      userEmail: email,
       itemCode: itemCode,
       itemName: itemName,
       qty: qty,
@@ -93,15 +95,25 @@ export default function OrderCart(props) {
 
   };
 
+  const handleViewOrders = (customerEmail) => {
+    // console.log(customerEmail)
+    
+    window.location.href = `/viewOrders?email=${customerEmail}`;
+  };
 
+ 
   return (
     <>
 
-      <Link to={'/viewOrders'}>
+      {/* <Link to={'/viewOrders'}>
       <Button variant="outlined" href="#outlined-buttons">
         View Orders
       </Button>
-       </Link>
+       </Link> */}
+
+ <Button variant="outlined" href="#outlined-buttons"  onClick={() => handleViewOrders(email)}>
+         View Orders
+     </Button>
 
       <label></label>
 

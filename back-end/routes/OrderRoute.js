@@ -5,10 +5,13 @@ const OrderController = require('../controllers/orderController')
 router.route('/order')
 .post(OrderController.saveOrder)
 
-router.route('/getOrder/:useremail')
-.get(OrderController.getSelectOrder)
+router.route('/getSelectOrder')
+.post(OrderController.getSelectOrder)
 
 router.route('/getOrder')
 .get(OrderController.getOrder)
+
+router.route('/deleteOrder/:id')
+.delete(OrderController.deleteOrder)
 
 module.exports =router;

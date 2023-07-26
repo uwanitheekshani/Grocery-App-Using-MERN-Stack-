@@ -45,24 +45,16 @@ const saveOrder = (req,res) => {
 //         })
 }
 
-const getSelectOrder = async (req,res) =>{
-    const email = req.params.useremail;
+const getSelectOrder =  (req,res) =>{
+    // const email = req.params.email;
+
+    // console.log();
     // Item.findById({_id:id})
+     
+    Order.find({userEmail:req.body.email})
+    .then(orders => res.json(orders))
 
-    // Order.findOne({userEmail:email})
-    // .then(orders => res.json(orders))
-
-    // .catch(err => res.json(err))
-
-    try {
-        // Fetch orders based on the provided email from the database
-        const orders = await Order.findAll({ where: { email } });
-    
-        res.json(orders);
-      } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'Server error' });
-      }
+    .catch(err => res.json(err))
 
 }
 
@@ -72,9 +64,16 @@ const getOrder = (req, res) => {
     .catch(err => res.json(err))
  }
 
+ const deleteOrder = (req,res) => { 
+    const id = req.params.id;
+    Order.findByIdAndDelete({_id:id})
+    .then(res => res.json(res))
+    .catch(err => res.json(err))
+}
+
 
 
 // const deleteUser = () => { }
 // const updateUser = () => { }
 
-module.exports = {saveOrder,getSelectOrder,getOrder}
+module.exports = {saveOrder,getSelectOrder,getOrder,deleteOrder}
