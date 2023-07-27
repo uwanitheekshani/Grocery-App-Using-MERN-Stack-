@@ -44,31 +44,6 @@ export default function ViewOrders() {
 
     console.log(customerEmail);
 
-    // const [useremail, setEmail] = useState("")
-
-    // useEffect(async () => {
-
-    // var userEmail = localStorage.getItem("formDetails");
-    // var email = JSON.parse(userEmail);
-    // setEmail(email)
-
-    //     axios.get('http://localhost:3500/api/v1/getSelectOrder/'+customerEmail)
-    // .then(res => {console.log(res)
-    //     setOrders(res.data);
-    //     console.log(res.data)
-    // })
-    // .catch(err => console.log(err))
-    //   }, [])
-
-
-
-    // }, [])
-
-
-
-
-
-
     useEffect( () => {
      
      loadAll();
@@ -81,13 +56,7 @@ export default function ViewOrders() {
         console.log(customerEmail)
         let email=customerEmail;
 
-        // axios
-        //   .post('http://localhost:3500/api/v1/getSelectOrder/'+{email})
-        //   .then((res) => {
-        //     console.log(res.data);
-        //     setOrders(res.data);
-        //   })
-        //   .catch((err) => console.log(err));
+        
         try{
 
            

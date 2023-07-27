@@ -19,7 +19,6 @@ router.route('/deleteItem/:id')
 
 router.route('/getSelectItem')
 .get(ItemController.getSelectItemQ)
-// router.route('/login')
-// .post(UserController.getUser)
+
 
 module.exports =router;

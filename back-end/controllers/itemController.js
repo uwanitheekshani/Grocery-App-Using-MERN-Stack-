@@ -67,10 +67,6 @@ const deleteItem = (req,res) => {
 
 
 const getSelectItemQ =  (req,res) =>{
-    // const email = req.params.email;
-
-    // console.log();
-    // Item.findById({_id:id})
     
     Item.findOne({qtyOnHand:req.body.uQty})
     .then(items => res.json(items))

@@ -1,20 +1,11 @@
 import { style } from '@mui/system';
 import * as React from 'react';
-import './Hero.css'
+import Typography from '@mui/material/Typography';
 
 function Hero() {
   return (
     <>
       <div id="carouselBasicExample" class="carousel slide carousel-fade" data-mdb-ride="carousel">
-
-
-        {/* <div id="container">
-          <div id="flip">
-            <div><div>grOccery</div></div>
-            <div><div>grOccery</div></div>
-            <div><div>grOccery</div></div>
-          </div>
-        </div> */}
 
 
         <div class="carousel-indicators">
@@ -44,7 +35,13 @@ function Hero() {
         <div class="carousel-inner">
 
           <div class="carousel-item active">
-            <img src="https://i.postimg.cc/2Sxgb4th/pho.jpg" style={{ height: '88vh' }} class="d-block w-100" />
+
+            
+      <Typography className='headName' variant="h3" gutterBottom>
+        Groccery
+      </Typography>
+
+            <img src="https://i.postimg.cc/2Sxgb4th/pho.jpg" style={{ height: '73vh' }} class="d-block w-100" />
           </div>
 
         </div>

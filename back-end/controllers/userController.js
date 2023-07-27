@@ -51,7 +51,7 @@ const getUser = (req, res) => {
 
 
 
-const deleteUser = () => { }
-const updateUser = () => { }
+// const deleteUser = () => { }
+// const updateUser = () => { }
 
 module.exports = {saveUser, getUser}

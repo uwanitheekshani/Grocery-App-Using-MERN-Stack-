@@ -93,7 +93,8 @@ export default function OrdersCart(props) {
             uQty
           })
           .then((res)=>{           
-          console.log(res.data.qtyOnHand)
+    
+            console.log(res.data.qtyOnHand)
           setQtyOnHand(res.data.qtyOnHand);
              
           }).catch(err=>console.log("err"))
@@ -127,12 +128,6 @@ export default function OrdersCart(props) {
   return (
     <>
 
-      {/* <Link to={'/viewOrders'}>
-      <Button variant="outlined" href="#outlined-buttons">
-        View Orders
-      </Button>
-       </Link> */}
-
  <Button variant="outlined" href="#outlined-buttons"  onClick={() => handleViewOrders(email)}>
          View Orders
      </Button>
@@ -144,11 +139,9 @@ export default function OrdersCart(props) {
           <TableHead>
             <TableRow>
               <StyledTableCell>Item Code</StyledTableCell>
-              {/* <StyledTableCell align="right">Item Code</StyledTableCell> */}
               <StyledTableCell align="right">Item Name</StyledTableCell>
               <StyledTableCell align="right">Quantity</StyledTableCell>
               <StyledTableCell align="right">Amount</StyledTableCell>
-              {/* <StyledTableCell align="right">Delete</StyledTableCell> */}
             </TableRow>
           </TableHead>
           <TableBody>
@@ -160,8 +153,6 @@ export default function OrdersCart(props) {
                 <StyledTableCell align="right">{order.itemName}</StyledTableCell>
                 <StyledTableCell align="right">{order.qty}</StyledTableCell>
                 <StyledTableCell align="right">{order.amount}</StyledTableCell>
-                {/* <StyledTableCell align="right">{order.itemName}</StyledTableCell>
-              <StyledTableCell align="right">{row.protein}</StyledTableCell> */}
               </StyledTableRow>
 
             ))}

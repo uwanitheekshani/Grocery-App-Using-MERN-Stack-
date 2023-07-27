@@ -14,7 +14,6 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-// import { Link } from 'react-router-dom'
 
 function Copyright(props) {
   return (
@@ -37,7 +36,7 @@ export default function SignUp() {
 
   const navigate = useNavigate();
 
-  const handleLinkClick =(event) =>{
+  const handleLinkClick = (event) => {
     event.preventDefault();
     navigate("/Login");
   }
@@ -111,7 +110,7 @@ export default function SignUp() {
                 <TextField
                   required
                   fullWidth4
-                  
+
                   id="lastName"
                   label="Last Name"
                   name="lastName"
@@ -156,7 +155,7 @@ export default function SignUp() {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link  href='#' variant="body2" onClick={handleLinkClick}>
+                <Link href='#' variant="body2" onClick={handleLinkClick}>
                   Already have an account? Sign in
                 </Link>
               </Grid>
