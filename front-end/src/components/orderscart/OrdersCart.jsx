@@ -11,6 +11,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import Button from '@mui/material/Button';
 import axios from 'axios';
+import './OrdersCart.css'
 // import { Link} from 'react-router-dom';
 
 
@@ -128,7 +129,7 @@ export default function OrdersCart(props) {
   return (
     <>
 
- <Button variant="outlined" href="#outlined-buttons"  onClick={() => handleViewOrders(email)}>
+ <Button variant="outlined" href="#outlined-buttons" className='viewBtn'  onClick={() => handleViewOrders(email)}>
          View Orders
      </Button>
 

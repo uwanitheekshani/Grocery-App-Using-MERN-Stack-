@@ -41,7 +41,7 @@ function Hero() {
         Groccery
       </Typography>
 
-            <img src="https://i.postimg.cc/2Sxgb4th/pho.jpg" style={{ height: '73vh' }} class="d-block w-100" />
+            <img src="https://i.postimg.cc/2Sxgb4th/pho.jpg" style={{ height: '63vh' }} class="d-block w-100" />
           </div>
 
         </div>
