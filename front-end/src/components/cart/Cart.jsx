@@ -12,10 +12,6 @@ import Button from '@mui/material/Button';
 import { Link } from 'react-router-dom';
 // const AdminDash = require('../admindash/AdminDash')
 
-
-
-
-
 export default function Cart() {
 
     const [items, setItems] = useState([]);
@@ -42,6 +38,7 @@ export default function Cart() {
       array.push({
           itemCode,
           itemName,
+          itemPrice,
           qty,
           amount:qty*itemPrice
       });
@@ -56,7 +53,6 @@ export default function Cart() {
           .then(response => {
             setItems(response.data);
            
-            // window.location.reload()
           })
           .catch(error => {
             console.error(error);
@@ -70,8 +66,6 @@ export default function Cart() {
      </Link>
 
     <Card sx={{display:'flex', flexDirection:'row', gap:5, padding:8}}>
-
-    {/* <form onSubmit = {handleAddtoCart}> */}
 
         {items.map(item => (
       <CardActionArea key={item._id}>
@@ -97,10 +91,7 @@ export default function Cart() {
                   <option key={i + 1} value={i + 1}>{i + 1}</option>)
               })}
             </select>
-          {/* <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography> */}
+         
           <Typography gutterBottom variant="h5" component="div"  value={itemPrice}
           onChange={(e) => setItemPrice(e.target.value)}>
           Price: {item.itemPrice}/-
@@ -117,7 +108,7 @@ export default function Cart() {
             let itemName=item.itemName;
             let itemPrice=item.itemPrice;
             let qtyOnHand=item.qtyOnHand;
-            // let qty=qty;
+           
             setItemCode(itemCode);
             setItemName(itemName);
             setItemPrice(itemPrice);
@@ -131,7 +122,7 @@ export default function Cart() {
         </CardContent>
       </CardActionArea>
       ))}
-      {/* </form> */}
+    
     </Card>
     </>
   );

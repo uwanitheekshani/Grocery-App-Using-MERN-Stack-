@@ -64,6 +64,20 @@ const deleteItem = (req,res) => {
     .then(res => res.json(res))
     .catch(err => res.json(err))
 }
+
+
+const getSelectItemQ =  (req,res) =>{
+    // const email = req.params.email;
+
+    // console.log();
+    // Item.findById({_id:id})
+    
+    Item.findOne({qtyOnHand:req.body.uQty})
+    .then(items => res.json(items))
+
+    .catch(err => res.json(err))
+
+}
 // const updateItem = () => { }
 
-module.exports = {saveItem,getItem,getSelectItem,updateItem,deleteItem}
+module.exports = {saveItem,getItem,getSelectItem,updateItem,deleteItem,getSelectItemQ}

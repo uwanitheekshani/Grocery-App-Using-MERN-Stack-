@@ -45,7 +45,7 @@ export default function OrdersCart(props) {
 
   const [email, setEmail] = useState("");
 
-  
+  const [qtyOnHand, setQtyOnHand] = useState()
 
   useEffect(() => {
 
@@ -64,7 +64,7 @@ export default function OrdersCart(props) {
 
 
   // console.log(e);
-  const handleCheckout = async (itemCode, itemName, qty, amount) => {
+  const handleCheckout = async (itemCode, itemName,itemPrice, qty, amount) => {
 
 
     const obj = {
@@ -76,6 +76,8 @@ export default function OrdersCart(props) {
     }
     // console.log(obj);
 
+    const uQty=obj.itemCode;
+
     try {
 
       await axios
@@ -85,7 +87,27 @@ export default function OrdersCart(props) {
         .then((res) => {
           alert(res.data.message)
       
+//===========================================================
+          axios
+          .get("http://localhost:3500/api/v1/getSelectItem",{
+            uQty
+          })
+          .then((res)=>{           
+          console.log(res.data.qtyOnHand)
+          setQtyOnHand(res.data.qtyOnHand);
+             
+          }).catch(err=>console.log("err"))
+
+          // let i=qtyOnHand
+          // console.log()
+
+          axios.put("http://localhost:3500/api/v1/updateItem/"+uQty, { itemCode:itemCode, itemName:itemName, itemPrice:itemPrice, qtyOnHand:qtyOnHand-qty})
+
+//===============================================================
+
+
         }).catch(err => alert(err.response.data.message))
+
 
     } catch (err) {
       alert("Failed");
@@ -152,7 +174,7 @@ export default function OrdersCart(props) {
 
       {orders.map((order) => (
         <Button type="submit" onClick={() => {
-          handleCheckout(order.itemCode, order.itemName, order.qty, order.amount)
+          handleCheckout(order.itemCode, order.itemName,order.itemPrice, order.qty, order.amount)
         }} variant="contained">Check Out</Button>
       ))}
     </>

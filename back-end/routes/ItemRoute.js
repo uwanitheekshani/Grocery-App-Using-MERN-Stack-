@@ -16,6 +16,9 @@ router.route('/updateItem/:id')
 
 router.route('/deleteItem/:id')
 .delete(ItemController.deleteItem)
+
+router.route('/getSelectItem')
+.get(ItemController.getSelectItemQ)
 // router.route('/login')
 // .post(UserController.getUser)
 
