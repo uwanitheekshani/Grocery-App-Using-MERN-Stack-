@@ -65,10 +65,10 @@ export default function Cart() {
      <Button  variant="outlined" color="secondary" style={{marginTop:10}}>My-Orders</Button>
      </Link>
 
-    <Card sx={{display:'flex', flexDirection:'row', gap:5, padding:8}}>
+    <Card sx={{display:'flex', flexDirection:'row', gap:5, padding:8, flexWrap:'wrap',marginLeft:'20'}}>
 
         {items.map(item => (
-      <CardActionArea key={item._id}>
+      <CardActionArea key={item._id} sx={{ maxWidth: '20%', flexBasis: '20%', flexGrow: 1 }}>
         <CardMedia
           component="img"
           height="140"

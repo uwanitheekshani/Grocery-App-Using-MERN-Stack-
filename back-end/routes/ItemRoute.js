@@ -18,7 +18,7 @@ router.route('/deleteItem/:id')
 .delete(ItemController.deleteItem)
 
 router.route('/getSelectItem')
-.get(ItemController.getSelectItemQ)
+.post(ItemController.getSelectItemQ)
 
 
 module.exports =router;

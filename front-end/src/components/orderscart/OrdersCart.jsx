@@ -45,7 +45,7 @@ export default function OrdersCart(props) {
 
   const [email, setEmail] = useState("");
 
-  const [qtyOnHand, setQtyOnHand] = useState()
+  const [newqtyOnHand, setQtyOnHand] = useState()
 
   useEffect(() => {
 
@@ -76,8 +76,9 @@ export default function OrdersCart(props) {
     }
     // console.log(obj);
 
-    const uQty=obj.itemCode;
 
+    const uQty=obj.itemCode;
+    
     try {
 
       await axios
@@ -89,7 +90,7 @@ export default function OrdersCart(props) {
       
 //===========================================================
           axios
-          .get("http://localhost:3500/api/v1/getSelectItem",{
+          .post("http://localhost:3500/api/v1/getSelectItem",{
             uQty
           })
           .then((res)=>{           
@@ -101,8 +102,7 @@ export default function OrdersCart(props) {
 
           // let i=qtyOnHand
           // console.log()
-
-          axios.put("http://localhost:3500/api/v1/updateItem/"+uQty, { itemCode:itemCode, itemName:itemName, itemPrice:itemPrice, qtyOnHand:qtyOnHand-qty})
+  axios.put("http://localhost:3500/api/v1/updateItem/"+uQty, { itemCode:itemCode, itemName:itemName, itemPrice:itemPrice, qtyOnHand:newqtyOnHand-qty})
 
 //===============================================================
 
